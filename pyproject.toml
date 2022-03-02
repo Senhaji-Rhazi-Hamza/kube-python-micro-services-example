@@ -1,5 +1,8 @@
 [tool.poetry]
 name = "kube-python-micro-services-example"
+packages = [
+    { include = "app" }
+]
 version = "0.1.0"
 description = "Project aims to be an didactic example on how to deploy python micro-services in kubernetes"
 authors = ["Senhaji-Rhazi-Hamza <hamza.senhajirhazi@gmail.com>"]
@@ -8,6 +11,8 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^2.0.3"
+click = "^8.0.4"
+diagrams = "^0.21.1"
 
 [tool.poetry.dev-dependencies]
 

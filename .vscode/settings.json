@@ -1,5 +1,5 @@
 {
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "autopep8",
     "python.testing.pytestArgs": [
         "tests"
     ],

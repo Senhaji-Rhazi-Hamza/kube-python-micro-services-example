@@ -1,0 +1,1 @@
+poetry run python app/cli/run.py

@@ -3,7 +3,7 @@ from flask import jsonify
 DEFAULT_HEADERS = {"Content-Type": "application/json"}
 
 
-def message(payload="", code=200):
+def make_response(payload="", code=200):
     return (jsonify(payload), code, DEFAULT_HEADERS)
 
 
@@ -16,7 +16,7 @@ def error(error_code_str, message_str=None, code=500):
     if message_str:
         payload["message"] = message_str
 
-    return message(payload, code)
+    return make_response(payload, code)
 
 def not_found():
     return error("Not found", code=404)

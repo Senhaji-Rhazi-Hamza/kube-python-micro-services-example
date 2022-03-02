@@ -1,5 +1,5 @@
 from app.config import logging
-from app import messages
+from app.messages import make_response
 
 
 def setup(app):
@@ -11,8 +11,8 @@ def error_handler(e):
     logging.exception("An error occurred during a request.")
     logging.exception(e)
 
-    return messages.internal_error()
+    return make_response.internal_error()
 
 def not_found(e):
     logging.exception(e)
-    return messages.not_found()
+    return make_response.not_found()

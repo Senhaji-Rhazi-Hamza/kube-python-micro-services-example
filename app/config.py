@@ -3,6 +3,7 @@ import  logging
 import sys 
 
 
+
 FORMAT = "%(asctime)s - (%(name)s) - %(levelname)s - %(message)s"
 
 logging.basicConfig(format=FORMAT)
@@ -17,7 +18,7 @@ for handler in logger.handlers:
 logger.addHandler(handler)
 
 
-
+DEBUG_MODE=os.getenv("DEBUG_MODE", False)
 
 MUL_HOST=os.getenv('MUL_HOST', '0.0.0.0')
 
