@@ -1,10 +1,10 @@
 import os
-from app import config
-import requests
 
+import requests
 from flask import Flask, request
 
-from app import  messages
+from app.messages import make_response
+from app import config
 
 
 app = Flask(__name__)

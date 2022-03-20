@@ -4,8 +4,8 @@ import datetime
 
 from flask import Flask, request
 
-from app.lib.arithmetic import my_sum
-from app.messages import message
+from app.lib.arithmetic import my_sum, my_mul
+from app.messages import make_response
 
 
 app = Flask(__name__)
