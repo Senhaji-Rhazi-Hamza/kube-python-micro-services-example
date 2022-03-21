@@ -1,6 +1,7 @@
 import os
 
 import requests
+
 from flask import Flask, request
 
 from app.messages import make_response
@@ -15,7 +16,7 @@ def health_check():
                 "message": "welcome to the service ari-entry",
                 "status": "success"
             }
-    return make_response.message(payload, 200)
+    return make_response(payload, 200)
 
 
 @app.route('/sum', methods=["POST"])
@@ -25,7 +26,7 @@ def sum():
             "list": l
     }
     response = requests.post(f'http://{config.SUM_HOST}:8002/sum', json=payload)
-    return make_response.message(response.json())
+    return make_response(response.json())
 
 
 @app.route('/mul', methods=["POST"])
@@ -35,7 +36,7 @@ def mul():
             "list": l
     }
     response = requests.post(f'http://{config.MUL_HOST}:8001/mul', json=payload)
-    return make_response.message(response.json())
+    return make_response(response.json())
 
 
 

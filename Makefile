@@ -1,36 +1,23 @@
 
-# If the first argument is "run"...
-ifeq (run,$(firstword $(MAKECMDGOALS)))
-  # use the rest as arguments for "run"
-  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  
-  # ...and turn them into do-nothing targets
-  # REF : https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run
-  $(eval $(RUN_ARGS):;@:)
-endif
-
-cli:
-	sh bin/cli.sh $(RUN_ARGS)
-
-.PHONY: run
-run : cli
-	@echo RUNED CLI
-
-TOTO TATA:;
-	@echo $@
+define build_docker_image
+	docker image build --rm -t $(1):$(2) -f $(3) .
+	docker tag $(1):$(2) $(1):latest
+endef
 
 
+export PYTHONPATH=.
 
-# action:
-# 	@echo action $(filter-out $@,$(MAKECMDGOALS))
+DOCKER_IMAGE := mskube
+DOCKER_TAG := 0.0.0
 
 
+clean: clean_pyc
 
-# # clitest:
-# # 	sh bin/test.sh
+clean_pyc:
+	find . -name "*.pyc" -exec rm -f {} \;
 
-# test:
-# 	@echo $(call args,defaultstring)
+# building base image 
+build_base_image: clean
+	$(call build_docker_image,${DOCKER_IMAGE},${DOCKER_TAG},Dockerfile)
 
-# action:
-# 	echo action $(filter-out $@,$(MAKECMDGOALS))
+

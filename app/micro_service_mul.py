@@ -1,11 +1,11 @@
 import os
-import config
-import datetime
+
 
 from flask import Flask, request
 
-from app.lib.arithmetic import my_mul, my_sum
+from app.lib.arithmetic import my_mul
 from app.messages import make_response
+from app import config
 
 app = Flask(__name__)
 
@@ -15,19 +15,18 @@ def health_check():
                 "message": "welcome to the example service ari - mul",
                 "status": "success"
             }
-    return make_response.message(payload, 200)
+    return make_response(payload, 200)
 
 
 @app.route('/mul', methods=["POST"])
 def mul():
-    #import ipdb; ipdb.set_trace()
     l = request.get_json()['list']
     payload = {
         "message": "my mul function",
         "status": "success",
-        "result" : my_mul(*l) * 2,
+        "result" : my_mul(*l),
     }
-    return make_response.message(payload)
+    return make_response(payload)
 
 
 

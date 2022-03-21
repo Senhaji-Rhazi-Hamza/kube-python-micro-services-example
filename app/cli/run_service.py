@@ -3,9 +3,11 @@ import os
 import click
 
 from app.server_monolithic import app as app_monolithic
+from app.micro_service_mul import app as app_ms_mul
+from app.micro_service_sum import app as app_ms_sum
 
 
-@click.command(name="app_monolithic")
+@click.command(name="service_monolithic")
 def run_app_monolithic():
     app_monolithic.run(
         debug=True,
@@ -13,52 +15,33 @@ def run_app_monolithic():
         port=os.getenv('PORT', 8000)
     )
 
-@click.command(name="app_master")
-def run_app_monolithic():
+
+@click.command(name="ms_service_master")
+def run_ms_app_master():
     app_monolithic.run(
         debug=True,
         host="0.0.0.0",
         port=os.getenv('PORT', 8000)
     )
-# import click
-# import os
-# from server import app
-# from server_mul import app as app_mul
-# from server_sum import app as app_sum
-# from server_entry import app as app_entry
 
 
-
-# @click.command(name="run_app")
-# def run_app():
-#     app.run(
-#         debug=True, host="0.0.0.0", port=os.getenv('PORT', 8000)
-#         )
-
-# @click.command(name="run_app_mul")
-# def run_app_mul():
-#     app_mul.run(
-#         debug=True, host="0.0.0.0", port=os.getenv('PORT', 8001)
-#         )
-
-# @click.command(name="run_app_sum")
-# def run_app_sum():
-#     app_sum.run(
-#         debug=True, host="0.0.0.0", port=os.getenv('PORT', 8002)
-#         )
-
-# @click.command(name="run_app_entry")
-# def run_app_entry():
-#     app_entry.run(
-#         debug=True, host="0.0.0.0", port=os.getenv('PORT', 8000)
-#         )
+@click.command(name="ms_service_mul")
+def run_ms_app_mul():
+    app_ms_mul.run(
+        debug=True, host="0.0.0.0", port=os.getenv('PORT', 8002)
+    )
 
 
-# run_app_functions = [
-#     run_app,
-#     run_app_mul,
-#     run_app_entry,
-#     run_app_sum,
-#     ]
+@click.command(name="ms_service_sum")
+def run_ms_app_sum():
+    app_ms_sum.run(
+        debug=True, host="0.0.0.0", port=os.getenv('PORT', 8001)
+    )
 
-services_cmds = [run_app_monolithic]
+
+services_cmds = [
+    run_app_monolithic,
+    run_ms_app_master,
+    run_ms_app_mul,
+    run_ms_app_sum
+]
