@@ -1,0 +1,20 @@
+###
+GET http://0.0.0.0:8000/ HTTP/1.1
+
+###
+POST http://0.0.0.0:8000/sum HTTP/1.1
+content-type: application/json
+
+{
+    "list": [1, 3, 5]
+}
+
+###
+POST http://0.0.0.0:8000/mul HTTP/1.1
+content-type: application/json
+
+{
+    "list": [1, 3, 5]
+}
+
+###
