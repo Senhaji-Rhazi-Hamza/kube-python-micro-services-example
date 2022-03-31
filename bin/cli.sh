@@ -1,1 +1,1 @@
-poetry run python app/cli/run.py
+poetry run python app/cli/run.py $@
