@@ -1,5 +1,4 @@
 import click
-import ipdb; ipdb.set_trace()
 from app.lib.arithmetic.mul import my_mul 
 
 @click.command(name="mul_cmd")
