@@ -3,7 +3,7 @@ import click
 from app.lib.arithmetic.sum import my_sum
 
 
-@click.command(name="sum_cmd")
+@click.command(name="sum_cmd",  help="Sum multiple numbers and print the result")
 @click.option(
     "--element", "-e", required=True, help="element to perform op for", type=click.FLOAT, multiple=True
 )

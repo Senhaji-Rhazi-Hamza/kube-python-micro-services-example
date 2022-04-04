@@ -1,7 +1,7 @@
 import click
 from app.lib.arithmetic.mul import my_mul 
 
-@click.command(name="mul_cmd")
+@click.command(name="mul_cmd", help="Multiply multiple numbers and print the result")
 @click.option(
     "--element", "-e", required=True, help="element to perform op for", type=click.FLOAT,multiple=True
 )
