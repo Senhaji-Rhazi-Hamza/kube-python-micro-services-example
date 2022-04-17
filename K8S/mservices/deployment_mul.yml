@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-mul
+  name: ms-mul
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-mul
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ms-mul
+    spec:
+      containers:
+      - args:
+        - ms_service_mul
+        image: mskube
+        name: ms-mul
+        ports:
+        - containerPort: 8001
+        imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: envs-config
+        resources: {}
+status: {}

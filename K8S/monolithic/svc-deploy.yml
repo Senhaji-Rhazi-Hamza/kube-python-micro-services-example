@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-monolithic
+  namespace: default
+spec:
+  selector:
+    app: monolithic
+  type: NodePort
+  sessionAffinity: None
+  ports:
+  - name: svc-monolithic
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+    # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+    # you can specify a value in the `spec.ports[*].nodePort` field.
+    nodePort: 30080

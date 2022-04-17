@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-sum
+  name: ms-sum
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-sum
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ms-sum
+    spec:
+      containers:
+      - args:
+        - ms_service_sum
+        image: mskube
+        name: ms-sum
+        ports:
+        - containerPort: 8002
+        imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: envs-config
+        resources: {}
+status: {}

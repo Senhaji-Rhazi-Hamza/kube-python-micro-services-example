@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-master
+  name: ms-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-master
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ms-master
+    spec:
+      containers:
+      - args:
+        - ms_service_master
+        image: mskube
+        name: master
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Never
+        envFrom:
+          - configMapRef:
+              name: envs-config
+        resources: {}
+status: {}

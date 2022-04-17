@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: monolithic
+  name: monolithic
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: monolithic
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: monolithic
+    spec:
+      containers:
+      - args:
+        - service_monolithic
+        image: mskube
+        name: monolithic
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Never
+        resources: {}
+status: {}
