@@ -6,14 +6,14 @@ RUN apt-get update && \
     apt-get -y install libglib2.0-0 libsm6 libxext6 libxrender-dev
 
 # Python requirements
-RUN mkdir /appp
+RUN mkdir /app
 ADD requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
 # Copy code
-ADD . /appp/
+ADD . /app/
 RUN chmod -R 0644 /app
-WORKDIR /appp/
+WORKDIR /app/
 ENV PYTHONPATH=${PYTHONPATH}:.
 
 EXPOSE 8000

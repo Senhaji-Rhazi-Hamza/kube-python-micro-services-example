@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route('/', methods=["GET"])
 def health_check():
     payload = {
-                "message": "welcome to the example service ari - sum",
+                "message": "welcome to the example microservice sum",
                 "status": "success"
             }
     return make_response(payload, 200)
@@ -24,7 +24,7 @@ def sum():
     l = request.get_json()['list']
     
     payload = {
-        "message": "my sum function",
+        "message": "my sum function from microservice",
         "status": "success",
         "result" : my_sum(*l),
     }
@@ -35,5 +35,5 @@ def sum():
 
 if __name__ == "__main__":
     app.run(
-        debug=config.DEBUG_MODE, host="0.0.0.0", port=os.getenv('PORT', 8002)
+        debug=config.DEBUG_MODE, host="0.0.0.0", port=os.getenv('PORT', config.SUM_PORT)
         )

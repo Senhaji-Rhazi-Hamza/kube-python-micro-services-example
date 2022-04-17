@@ -13,7 +13,7 @@ app = Flask(__name__)
 @app.route('/', methods=["GET"])
 def health_check():
     payload = {
-                "message": "welcome to the service ari-entry",
+                "message": "welcome to the microservice master",
                 "status": "success"
             }
     return make_response(payload, 200)
@@ -25,7 +25,7 @@ def sum():
     payload = {
             "list": l
     }
-    response = requests.post(f'http://{config.SUM_HOST}:8002/sum', json=payload)
+    response = requests.post(f'http://{config.SUM_HOST}:{config.SUM_PORT}/sum', json=payload)
     return make_response(response.json())
 
 
@@ -35,7 +35,7 @@ def mul():
     payload = {
             "list": l
     }
-    response = requests.post(f'http://{config.MUL_HOST}:8001/mul', json=payload)
+    response = requests.post(f'http://{config.MUL_HOST}:{config.MUL_PORT}/mul', json=payload)
     return make_response(response.json())
 
 

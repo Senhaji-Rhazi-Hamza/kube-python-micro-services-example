@@ -10,7 +10,7 @@ with Diagram("Exposed Pod with 3 Replicas", show=False):
         pods = [Pod("pod1"),
                 Pod("pod2"),
                 Pod("pod3")]
-        svc << pods
+        svc >> pods
 
     # net = Ingress("domain.com") >> Service("svc")
     # net >> [Pod("pod1"),
