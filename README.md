@@ -1,8 +1,13 @@
 # kube-python-micro-services-example
 
 ### What is about
-This project aims to serve as a didactic example, on how to deploy python micro services inside a kubernetes cluster
+This project aims to serve as a didactic example, on how to structure a simple monolithic python app, then turn it into multiple microservices, then show how deploy each python micro service inside a kubernetes cluster, see the schemas below for both the architectures deployment
 
+### Monolithic deployment architecture's schema 
+![mon](data/mon.png.png)
+
+### Microservices deployment architecture's schema 
+![mon](data/ms.png.png)
 ### Pre-requisite
 ```
 # as a pre-requisite you should have poetry installed, otherwise check poetry installation --> https://python-poetry.org/docs/#installation
@@ -146,4 +151,47 @@ curl -X POST http://0.0.0.0:8001/sum -H "Content-Type: application/json" -d '{"l
   "result": 9,
   "status": "success"
 }
+```
+### Usage (with kubernetes)
+
+
+#### Setup
+
+```
+# install minikube from here https://minikube.sigs.k8s.io/docs/start/
+#start minikube
+minikube start
+#export env vars to make minikube aware of your docker images
+eval $(minikube docker-env)
+# Build docker image
+docker image build - rm -t mskube:0.0.0 -f Dockerfile .
+```
+
+#### Deploy monolithic architecture
+```
+kubectl apply -f K8S/monolithic
+#forward nodeport
+kubectl port-forward service/svc-monolithic 8000:8000
+# test your deploy
+curl http://localhost:8000  
+{
+  "message": "welcome to the example service", 
+  "status": "success"
+}
+```
+
+#### Deploy microservices architecture
+```
+# deploy 
+kubectl apply -f K8S/mservices 
+# forward nodeport
+kubectl port-forward service/svc-master 8000:8000
+# test your deploy
+curl http://localhost:8000  
+>>>
+{
+  "message": "welcome to the microservice master", 
+  "status": "success"
+}
+>>>
 ```

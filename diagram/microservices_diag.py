@@ -4,12 +4,9 @@ from diagrams.k8s.compute import Deployment, Pod, ReplicaSet
 from diagrams.k8s.network import Ingress, Service
 from diagrams.k8s.network import Service
 
-with Diagram("Microservices", show=False):
-    with Cluster("microservices"):
+with Diagram("3 deployments services", filename="data/ms.png", show=False):
+    with Cluster("Microservices architecture"):
         svc_master = Service("svc_master")
-        # pods = [Pod("pod1"),
-        #         Pod("pod2"),
-        #         Pod("pod3")]
         master_pod = Pod("master_pod")
         master_deploy = Deployment("master_deploy")
         svc_master >>   master_deploy >> master_pod

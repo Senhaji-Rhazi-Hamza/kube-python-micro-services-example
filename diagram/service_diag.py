@@ -4,18 +4,13 @@ from diagrams.k8s.compute import Deployment, Pod, ReplicaSet
 from diagrams.k8s.network import Ingress, Service
 from diagrams.k8s.network import Service
 
-with Diagram("Exposed Pod with 3 Replicas", show=False):
-    with Cluster("Simple service"):
+with Diagram("Exposed Deployment with 3 Replicas", filename="data/mon.png", show=False):
+    with Cluster("Monolithic architecture"):
         svc = Service("svc")
         pods = [Pod("pod1"),
                 Pod("pod2"),
                 Pod("pod3")]
-        #svc >> pods
         
         dp = Deployment("deploy")
         dp >> pods
         svc >> dp
-    # net = Ingress("domain.com") >> Service("svc")
-    # net >> [Pod("pod1"),
-    #         Pod("pod2"),
-    #         Pod("pod3")] << ReplicaSet("rs") << Deployment("dp") << HPA("hpa")

@@ -28,3 +28,22 @@ spec:
               name: envs-config
         resources: {}
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ms-mul
+  name: svc-mul
+spec:
+  ports:
+  - port: 8001
+    protocol: TCP
+    targetPort: 8001
+  selector:
+    app: ms-mul
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
